@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, jsonify
+from flask import Flask, Response, request, jsonify, render_template
 from flask_pymongo import pymongo
 from database import DatabaseConnection
 import datetime
@@ -7,7 +7,8 @@ app = Flask(__name__)
 db = DatabaseConnection()
 
 @app.route("/addNewProperty", methods=["POST"])
-def addNewProperty():
+# vendor mode: add a new property
+def addNewProperty(): 
     document = {
         "name": request.form["name"],
         "propertyType": request.form["type"],
@@ -17,13 +18,16 @@ def addNewProperty():
     return Response("Property succesfully added", status=200, content_type="text/html")
 
 @app.route("/properties", methods=["GET"])
+# both vendor and renter: get a list of properties 
 def getProperties():
     properties = db.findMany("properties", {})
     return jsonify(properties)
 
 @app.route("/", methods=["GET"])
-def hello():
-    return Response("<h1> Hey there </h1>", status=200, content_type="text/html")
+# home page 
+def index():
+    #return Response("<h1> Hey there </h1>", status=200, content_type="text/html")
+    return render_template("index.html")
 
 @app.route("/greeting", methods=["POST"])
 def greeting():
