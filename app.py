@@ -32,9 +32,16 @@ def index():
         return "You are logged in as " + session["username"]
     return render_template("index.html")
 
-@app.route("/login")
+@app.route("/login", methods=["POST"])
 def login():
-    return ""
+    login_user = db.findOne("users", {"name": request.form["username"]})
+    if login_user:
+        # check if password is correct
+        if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password']) == login_user['password']:
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+
+    return 'Invalid username/password combination'
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
@@ -42,16 +49,16 @@ def register():
         existing_user = db.findOne("users", {"name": request.form["username"]})
         # if username is not in db, create new user
         if existing_user is None:
-            hashpass = bcrypt.hashpw(request.form["pass"], bcrypt.genSalt())
+            hashpass = bcrypt.hashpw(request.form["pass"].encode("utf-8"), bcrypt.gensalt())
             db.insert("users", {"name": request.form["username"], "password": hashpass})
             session["username"] = request.form["username"]
             return redirect(url_for("index"))
-        return "The username already exists!"
+        return "The username already exists"
     
     return render_template("register.html")
 
 @app.route("/greeting", methods=["POST"])
-def greeting():
+def greeting(): 
     name = request.form["name"]
     hour_of_day = datetime.datetime.now().time().hour
     greeting = ""
