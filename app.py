@@ -32,8 +32,12 @@ def index():
         return "You are logged in as " + session["username"]
     return render_template("index.html")
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET"])
 def login():
+    return render_template("login.html")
+
+@app.route("/authenticate", methods=["POST"])
+def authenticate():
     login_user = db.findOne("users", {"name": request.form["username"]})
     if login_user:
         # check if password is correct
