@@ -33,6 +33,7 @@
           </div>
         </form>
         <ul class="navbar-nav ml-auto">
+          {% if not session["logged_in"] %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Join us
@@ -56,6 +57,28 @@
             <a class="nav-link disabled" href="#">Disabled</a>
           </li>
           -->
+          {% else %}
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/login">Profile</a>
+                <!--<a class="dropdown-item" href="#">Another action</a>-->
+                
+                <a class="dropdown-item" href="/register">Sign up</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Sign out</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          {% endif %}
+
         </ul>
         
       </div>
