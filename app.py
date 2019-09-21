@@ -30,7 +30,15 @@ def index():
     # check if the user is logged in, if not pull up log in form
     if "username" in session:
         return "You are logged in as " + session["username"]
-    return render_template("index.html")
+    hour_of_day = datetime.datetime.now().time().hour
+    greeting = ""
+    if hour_of_day < 12: 
+        greeting = "Good morning!"
+    elif hour_of_day >= 12 and hour_of_day < 18:
+        greeting = "Good afternoon!"
+    else:
+        greeting = "Good evening!" 
+    return render_template("index.html", greeting=greeting)
 
 @app.route("/login", methods=["GET"])
 def login():
