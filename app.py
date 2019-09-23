@@ -58,6 +58,7 @@ def login():
                 session['username'] = request.form['username']
                 session['logged_in'] = True
                 return redirect(url_for('index'))
+            error = "Invalid username or password"
         else:
             error = "Invalid username or password"
 
