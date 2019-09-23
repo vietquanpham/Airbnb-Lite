@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block body %} 
+
+<body>
+    <!--<div class="row">-->
+    {% for property in properties %}
+        <!--
+        <div class="col-auto mb-2">
+            <div class="card mb-2" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{property["name"]}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{property["price"]}}</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Rent</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        -->
+        <div class="card flex-row flex-wrap">
+            <div class="card-header border-0">
+                <img src="//placehold.it/200" alt="">
+            </div>
+            <div class="card-block px-2">
+                <h4 class="card-title">Title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">BUTTON</a>
+            </div>
+            <div class="w-100"></div>
+            <div class="card-footer w-100 text-muted">
+                FOOTER
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+{% endblock %}
