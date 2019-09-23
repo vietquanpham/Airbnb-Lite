@@ -8,16 +8,21 @@ db = DatabaseConnection()
 @app.route("/add_new_property", methods=["POST", "GET"])
 # vendor mode: add a new property
 def add_new_property(): 
+    message = None
     if request.method == "POST":
         document = {
-            "name": request.form["name"],
-            "propertyType": request.form["type"],
-            "price": request.form["price"]
+            "propertyName": request.form["propertyName"],
+            "address": request.form["address"],
+            "homeType": request.form["homeType"],
+            "roomType": request.form["roomType"],
+            "price": request.form["price"],
+            "description": request.form["description"],
         }
         db.insert("properties", document)
-        return Response("Property succesfully added", status=200, content_type="text/html")
+        message = "Property successfully added"
+        return render_template("add_property.html", message=message)
     
-    return render_template ("add_property.html")
+    return render_template("add_property.html")
 
 @app.route("/properties", methods=["GET"])
 # both vendor and renter: get a list of properties 

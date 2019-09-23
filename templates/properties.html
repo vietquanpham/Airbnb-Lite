@@ -2,6 +2,15 @@
 {% block body %} 
 
 <body>
+    {% if not properties %}
+        <div class="card" style="margin: 20px">
+            <div class="row">
+                <div class="col-md-4 offset-md-4" style="padding: 60px">
+                    <div style="color:darkcyan;"><strong>No available properties at the moment</strong></div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <!--<div class="row">-->
     {% for property in properties %}
         <!--
@@ -22,7 +31,7 @@
                 <img src="//placehold.it/200" alt="">
             </div>
             <div class="card-block px-4 py-4">
-                <h4 class="card-title">{{property["name"]}}</h4>
+                <h4 class="card-title">{{property["propertyName"]}}</h4>
                 <p class="card-text">{{property["price"]}}</p>
                 <p class="card-text">{{property["propertyType"]}}</p>
                 <a href="#" class="btn btn-primary">Rent this property</a>
