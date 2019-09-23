@@ -102,6 +102,10 @@ def greeting():
     response = greeting + " " + name + "!"
     return Response(response, status=200, content_type="text/html")
 
+@app.route("/profile", methods=["GET"])
+def profile():
+    return render_template("profile.html")
+
 if __name__ == "__main__":
     app.secret_key = "secretkey"
     app.run(host="localhost", port=4000, debug=True)
