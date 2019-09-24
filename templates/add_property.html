@@ -1,58 +1,60 @@
 {% extends "base.html" %}
 {% block body %} 
 
-<div class="containter">
-    <div class="row">
-        <div class="col-md-4 offset-md-4" style="padding-top: 40px; padding-bottom: 40px;">
-            <form method=POST action="{{ url_for('add_new_property') }}">
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Property Name</label>
-                    <input type="text" class="form-control" name="propertyName" placeholder="Mansion by the Sea" required>
-                </div>
-                <div class="form-group">
-                        <label for="exampleFormControlInput1">Address</label>
-                        <input type="text" class="form-control" name="address" placeholder="700 Commonwealth Ave" required>
+<body style="background-color:linen;">
+    <div class="containter">
+        <div class="row">
+            <div class="col-md-4 offset-md-4" style="padding-top: 40px; padding-bottom: 40px;">
+                <form method=POST action="{{ url_for('add_new_property') }}">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Property Name</label>
+                        <input type="text" class="form-control" name="propertyName" placeholder="Mansion by the Sea" required>
                     </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Home Type</label>
-                    <select class="form-control" name="homeType" required>
-                    <option>Apartment</option>
-                    <option>House</option>
-                    <option>Bed & Breakfast</option>
-                    </select>
-                </div> 
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Room Type</label>
-                    <select class="form-control" name="roomType" required>
-                    <option>Entire home/apt</option>
-                    <option>Private room</option>
-                    <option>Shared room</option>
-                    </select>
-                </div> 
-                <!--<div class="form-group">
-                    <label for="exampleFormControlSelect2">Example multiple select</label>
-                    <select multiple class="form-control" id="exampleFormControlSelect2">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    </select>
-                </div>-->
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Price</label>
-                    <input type="text" class="form-control" name="price" placeholder="$" required>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Description</label>
-                    <textarea class="form-control" name="description" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Post this property</button>
-            </form>
-            {% if message %}
-                <div class="text" style="color:darkcyan">{{message}}</div>
-            {% endif %}
+                    <div class="form-group">
+                            <label for="exampleFormControlInput1">Address</label>
+                            <input type="text" class="form-control" name="address" placeholder="700 Commonwealth Ave" required>
+                        </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Home Type</label>
+                        <select class="form-control" name="homeType" required>
+                        <option>Apartment</option>
+                        <option>House</option>
+                        <option>Bed & Breakfast</option>
+                        </select>
+                    </div> 
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Room Type</label>
+                        <select class="form-control" name="roomType" required>
+                        <option>Entire home/apt</option>
+                        <option>Private room</option>
+                        <option>Shared room</option>
+                        </select>
+                    </div> 
+                    <!--<div class="form-group">
+                        <label for="exampleFormControlSelect2">Example multiple select</label>
+                        <select multiple class="form-control" id="exampleFormControlSelect2">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        </select>
+                    </div>-->
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Price</label>
+                        <input type="text" class="form-control" name="price" placeholder="$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Description</label>
+                        <textarea class="form-control" name="description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Post this property</button>
+                </form>
+                {% if message %}
+                    <div class="text" style="color:darkcyan">{{message}}</div>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
+</body>
 {% endblock %}

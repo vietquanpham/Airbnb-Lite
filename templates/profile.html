@@ -1,4 +1,17 @@
 {% extends "base.html" %}
 {% block body %} 
-
+<body style="background-color:papayawhip;">
+    <div class="card flex-row flex-wrap" style="margin: 20px">
+        <div class="card-header border-0">
+            <img src="//placehold.it/200x225" alt="">
+        </div>
+        <div class="card-block px-4 py-4">
+            <h4 class="card-title">{{user["name"]}}</h4>
+            <p class="card-text" style="color:darkgray">{{user["location"]}}</p>
+            <p class="card-text">{{user["description"]}}</p>
+            <a href="/edit_profile" class="btn btn-primary">Edit profile</a>
+        </div>
+        <div class="w-100"></div>
+    </div>
+</body>
 {% endblock %}

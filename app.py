@@ -24,6 +24,13 @@ def add_new_property():
     
     return render_template("add_property.html")
 
+@app.route("/get_property", methods=["POST"])
+def get_property():
+    rented_property = db.findOne("properties", {"_id": request.form["rented_property"]})
+    return rented_property
+    #db.insert("rented_properties", rented_property.__dict__)
+    return redirect(url_for("get_properties"))
+
 @app.route("/properties", methods=["GET"])
 # both vendor and renter: get a list of properties 
 def get_properties():
@@ -56,7 +63,7 @@ def index():
 def login():
     error = None
     if request.method == "POST":
-        login_user = db.findOne("users", {"name": request.form["username"]})
+        login_user = db.findOne("users", {"username": request.form["username"]})
         if login_user:
             # check if password is correct
             if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password']) == login_user['password']:
@@ -74,12 +81,13 @@ def register():
     error = None
     if request.method == "POST":
         if request.form["username"] != "":
-            existing_user = db.findOne("users", {"name": request.form["username"]})
+            existing_user = db.findOne("users", {"username": request.form["username"]})
             # if username is not in db, create new user
             if existing_user is None:
                 hashpass = bcrypt.hashpw(request.form["pass"].encode("utf-8"), bcrypt.gensalt())
-                db.insert("users", {"name": request.form["username"], "password": hashpass})
+                db.insert("users", {"username": request.form["username"], "password": hashpass})
                 session["username"] = request.form["username"]
+                session['logged_in'] = True
                 return redirect(url_for("index"))
             error = "The username already exists" 
         else:
@@ -92,24 +100,10 @@ def logout():
     session.pop('logged_in', None)
     return redirect(url_for("index"))
 
-@app.route("/greeting", methods=["POST"])
-def greeting(): 
-    name = request.form["name"]
-    hour_of_day = datetime.datetime.now().time().hour
-    greeting = ""
-    if not name:
-        return Response(status=404)
-    if hour_of_day < 12: 
-        greeting = "Good morning "
-    elif hour_of_day >= 12 and hour_of_day < 18:
-        greeting = "Good afternoon "
-    else:
-        greeting = "Good evening " 
-    response = greeting + " " + name + "!"
-    return Response(response, status=200, content_type="text/html")
-
 @app.route("/profile", methods=["GET"])
+# edit profile
 def profile():
+
     return render_template("profile.html")
 
 if __name__ == "__main__":
