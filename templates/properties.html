@@ -37,14 +37,14 @@
                 <p class="card-text">{{property["propertyType"]}}</p>
                 <p class="card-text">{{property["description"]}}</p>
                 <!--<a href="/properties" class="btn btn-primary">Rent this property</a>-->
-                <form action="{{ url_for('get_property') }}" method=POST>
-                    <input type=hidden value="{{ property[_id] }}"name="rented_property"></input>
+                <form action="{{ url_for('rent_property') }}" method=POST>
+                    <input type=hidden value="{{ property }}" name="rented_property_id"></input>
                     <button type="submit" class="btn btn-primary btn-block">Rent this property</button>
                 </form>
             </div>
             <div class="w-100"></div>
             <div class="card-footer w-100 text-muted">
-                FOOTER
+                Owned by {{property["owner"]}}
             </div>
         </div>
     {% endfor %}

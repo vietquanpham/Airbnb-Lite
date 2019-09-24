@@ -17,6 +17,7 @@ def add_new_property():
             "roomType": request.form["roomType"],
             "price": request.form["price"],
             "description": request.form["description"],
+            "owner": session["username"],
         }
         db.insert("properties", document)
         message = "Property successfully added"
@@ -24,11 +25,9 @@ def add_new_property():
     
     return render_template("add_property.html")
 
-@app.route("/get_property", methods=["POST"])
-def get_property():
-    rented_property = db.findOne("properties", {"_id": request.form["rented_property"]})
-    return rented_property
-    #db.insert("rented_properties", rented_property.__dict__)
+@app.route("/rent_property", methods=["POST"])
+def rent_property():
+    db.insert("rented_properties", {"property": request.form["rented_property_id"]})
     return redirect(url_for("get_properties"))
 
 @app.route("/properties", methods=["GET"])
@@ -103,8 +102,8 @@ def logout():
 @app.route("/profile", methods=["GET"])
 # edit profile
 def profile():
-
-    return render_template("profile.html")
+    user = db.findOne("users", {"username": session["username"]})
+    return render_template("profile.html", user=user)
 
 if __name__ == "__main__":
     app.secret_key = "secretkey"
